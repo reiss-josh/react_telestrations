@@ -29,14 +29,8 @@ class Firebase {
 
   doConvertToEmail = (email, password) =>
   {
-    var credential = this.auth.EmailAuthProvider.credential(email, password);
-    this.auth.currentUser.linkWithCredential(credential)
-      .then(function(usercred) {
-        var user = usercred.user;
-        console.log("Anonymous account successfully upgraded", user);
-      }).catch(function(error) {
-        console.log("Error upgrading anonymous account", error);
-      });
+    var credential = app.auth.EmailAuthProvider.credential(email, password);
+    return this.auth.currentUser.linkWithCredential(credential);
   }
  
   doSignOut = () => this.auth.signOut();
@@ -47,5 +41,6 @@ class Firebase {
     this.auth.currentUser.updatePassword(password);
   
   getCurrentUser = () => this.auth.currentUser;
+
 } 
 export default Firebase;

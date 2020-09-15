@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
  
+import AnonymousForm from '../AnonymousForm'
 import { SignUpLink } from '../SignUp';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
@@ -20,41 +21,6 @@ const INITIAL_STATE = {
   password: '',
   error: null,
 };
- 
-class AnonymousFormBase extends Component {
-  constructor(props) {
-    super();
-  }
-
-  onSubmit = event => {
-    this.props.firebase
-      .doSignInAnonymous()
-      .then((authUser) => {
-        authUser.user.updateProfile({displayName: "hey"})
-      })
-      .then((authUser) => {
-        this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
-      })
-      .catch(error => {
-        this.setState({ error });
-      });
-
-    event.preventDefault();
-  }
-
-  render() {
-    const error = this.state;
-    return(
-      <form onSubmit = {this.onSubmit}>
-        <button type="submit">
-          Sign In Anonymously
-        </button>
-        {error && <p>{error.message}</p>}
-      </form>
-    );
-  }
-}
 
 class SignInFormBase extends Component {
   constructor(props) {
@@ -118,12 +84,7 @@ const SignInForm = compose(
   withRouter,
   withFirebase,
 )(SignInFormBase);
-
-const AnonymousForm = compose(
-  withRouter,
-  withFirebase,
-)(AnonymousFormBase);
  
 export default SignInPage;
  
-export { SignInForm, AnonymousForm };
+export { SignInForm };

@@ -1,36 +1,40 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import {compose} from 'recompose';
- 
-import { withFirebase } from '../Firebase';
+
+import { withFirebase } from '../services/Firebase';
 import * as ROUTES from '../../constants/routes';
 
 const INITIAL_STATE = {
+  username: '',
   email: '',
   passwordOne: '',
   passwordTwo: '',
   error: null,
 };
 
-class AnonymousUpgraderBase extends Component {
+class SignUpFormBase extends Component {
   constructor(props) {
+    //super(props);
     super();
 
     this.state = {...INITIAL_STATE};
   }
 
   onSubmit = event => {
-    const { email, passwordOne } = this.state;
+    const { username, email, passwordOne } = this.state;
 
     this.props.firebase
-      .doConvertToEmail(email, passwordOne)
+      .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
+        authUser.user.updateProfile({displayName: username});
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
       .catch(error => {
         this.setState({ error });
       });
+ 
     event.preventDefault();
   }
  
@@ -40,6 +44,7 @@ class AnonymousUpgraderBase extends Component {
  
   render() {
     const {
+      username,
       email,
       passwordOne,
       passwordTwo,
@@ -49,11 +54,18 @@ class AnonymousUpgraderBase extends Component {
     const isInvalid =
       passwordOne !== passwordTwo ||
       passwordOne === '' ||
-      email === '';
+      email === '' ||
+      username === '';
 
     return (
-      <div> You have an anonymous account. You can link it to a full account here:
       <form onSubmit={this.onSubmit}>
+        <input
+          name="username"
+          value={username}
+          onChange={this.onChange}
+          type="text"
+          placeholder="Display Name"
+        />
         <input
           name="email"
           value={email}
@@ -81,15 +93,13 @@ class AnonymousUpgraderBase extends Component {
  
         {error && <p>{error.message}</p>}
       </form>
-      </div>
     );
   }
 }
  
-const AnonymousUpgrader = compose(
+const SignUpForm = compose(
   withRouter,
   withFirebase,
-)(AnonymousUpgraderBase);
+)(SignUpFormBase);
 
-
-export default AnonymousUpgrader;
+export default SignUpForm;

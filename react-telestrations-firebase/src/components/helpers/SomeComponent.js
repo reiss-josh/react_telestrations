@@ -1,6 +1,6 @@
 import React from 'react';
  
-import  { FirebaseContext } from '../Firebase';
+import  { FirebaseContext } from '../services/Firebase';
  
 const SomeComponent = () => (
   <FirebaseContext.Consumer>

@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
- 
-import AnonymousForm from '../AnonymousForm'
-import { SignUpLink } from '../SignUp';
-import { withFirebase } from '../Firebase';
+
+import { withFirebase } from '../services/Firebase';
 import * as ROUTES from '../../constants/routes';
- 
-const SignInPage = () => (
-  <div>
-    <h1>SignIn</h1>
-    <SignInForm />
-    <AnonymousForm />
-    <SignUpLink />
-  </div>
-);
- 
+
 const INITIAL_STATE = {
   email: '',
   password: '',
@@ -84,7 +73,5 @@ const SignInForm = compose(
   withRouter,
   withFirebase,
 )(SignInFormBase);
- 
-export default SignInPage;
- 
-export { SignInForm };
+
+export default SignInForm;

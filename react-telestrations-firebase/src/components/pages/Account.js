@@ -1,9 +1,9 @@
 import React from 'react';
 
 
-import { AuthUserContext } from '../Session';
-import UsernameUpdater from '../UsernameUpdate';
-import UpgradeAnonymousAccount from '../AnonymousUpgrade';
+import { AuthUserContext } from '../services/Session';
+import UsernameUpdater from '../helpers/UsernameUpdate.js';
+import UpgradeAnonymousAccount from '../helpers/AnonymousUpgrade.js';
 
 
 const AccountPage = () => (

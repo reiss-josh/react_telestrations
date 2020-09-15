@@ -30,6 +30,9 @@ class AnonymousFormBase extends Component {
     this.props.firebase
       .doSignInAnonymous()
       .then((authUser) => {
+        authUser.user.updateProfile({displayName: "hey"})
+      })
+      .then((authUser) => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })

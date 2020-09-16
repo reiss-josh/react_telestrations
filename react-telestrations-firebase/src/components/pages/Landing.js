@@ -1,7 +1,11 @@
 import React from 'react';
+import SignInPage from './SignIn.js';
  
 const LandingPage = () => (
-  <div>this is the landing page</div>
+  <div>
+    <h1>Welcome to game!!!</h1>
+    <SignInPage/>
+  </div>
 );
  
 export default LandingPage;

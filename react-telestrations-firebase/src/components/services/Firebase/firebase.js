@@ -1,4 +1,5 @@
 import app from 'firebase/app';
+import db from 'firebase/database';
 import 'firebase/auth';
  
 const config = {
@@ -15,6 +16,7 @@ class Firebase {
     app.initializeApp(config);
 
     this.auth = app.auth();
+    this.db = app.database();
   }
 
   // *** AUTH API ***

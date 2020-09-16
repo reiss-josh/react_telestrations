@@ -22,7 +22,7 @@ class AnonymousFormBase extends Component {
   };
 
   onSubmit = event => {
-    const { username, error } = this.state;
+    const { username } = this.state;
 
     this.props.firebase
       .doSignInAnonymous()
@@ -39,11 +39,10 @@ class AnonymousFormBase extends Component {
   }
 
   render() {
-    const { username,error } = this.state;
+    const { username,error, } = this.state;
 
     return(
       <div>
-      You have an anonymous account. You can link it here:
       <form onSubmit = {this.onSubmit}>
         <input
           name="username"
@@ -53,7 +52,7 @@ class AnonymousFormBase extends Component {
           placeholder="Username"
         />
         <button type="submit">
-          Sign In Anonymously
+          Create Guest Account
         </button>
         {error && <p>{error.message}</p>}
       </form>

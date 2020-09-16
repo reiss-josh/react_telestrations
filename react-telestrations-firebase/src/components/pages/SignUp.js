@@ -6,7 +6,10 @@ import * as ROUTES from '../../constants/routes';
 const SignUpPage = () => (
   <div>
     <h1>SignUp</h1>
+    Create new account:
     <SignUpForm />
+
+    You can change your username at any time from the Account screen!
   </div>
 );
 

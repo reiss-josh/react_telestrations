@@ -8,7 +8,9 @@ import { SignUpLink } from './SignUp.js';
 const SignInPage = () => (
   <div>
     <h1>SignIn</h1>
+    Sign in to account:
     <SignInForm />
+    Join as a guest:
     <AnonymousForm />
     <SignUpLink />
   </div>

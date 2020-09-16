@@ -14,7 +14,7 @@ class UsernameUpdaterBase extends Component{
   }
 
   onSubmit = event => {
-    const { new_username, error } = this.state;
+    const { new_username } = this.state;
 
     this.props.firebase
       .getCurrentUser()
